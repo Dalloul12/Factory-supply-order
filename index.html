@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="mobile-web-app-capable" content="yes">
     <title>نظام الفواتير - أمر توريد</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -83,37 +84,39 @@
         
         <div class="form-section">
             <h2 class="section-title">تفاصيل البضاعة</h2>
-            <table id="itemsTable">
-                <thead>
-                    <tr>
-                        <th width="5%">م</th>
-                        <th width="30%">البيان</th>
-                        <th width="10%">الكمية</th>
-                        <th width="15%">سعر الوحدة</th>
-                        <th width="15%">النقل</th>
-                        <th width="15%">الإجمالي</th>
-                        <th width="10%"><button type="button" class="btn-primary" id="addRowBtn">+</button></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td><input type="text" class="item-desc" placeholder="وصف الصنف"></td>
-                        <td><input type="number" class="item-qty" min="1" value="1"></td>
-                        <td><input type="number" class="item-price" min="0" step="0.01" value="0"></td>
-                        <td><input type="number" class="item-shipping" min="0" step="0.01" value="0"></td>
-                        <td class="item-total">0.00</td>
-                        <td><button type="button" class="btn-danger remove-row-btn">x</button></td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="5" style="text-align: left;">المجموع الكلي</td>
-                        <td id="grandTotal">0.00</td>
-                        <td></td>
-                    </tr>
-                </tfoot>
-            </table>
+            <div class="table-container">
+                <table id="itemsTable">
+                    <thead>
+                        <tr>
+                            <th width="5%">م</th>
+                            <th width="30%">البيان</th>
+                            <th width="10%">الكمية</th>
+                            <th width="15%">سعر الوحدة</th>
+                            <th width="15%">النقل</th>
+                            <th width="15%">الإجمالي</th>
+                            <th width="10%"><button type="button" class="btn-primary" id="addRowBtn">+</button></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><input type="text" class="item-desc" placeholder="وصف الصنف"></td>
+                            <td><input type="number" class="item-qty" min="1" value="1"></td>
+                            <td><input type="number" class="item-price" min="0" step="0.01" value="0"></td>
+                            <td><input type="number" class="item-shipping" min="0" step="0.01" value="0"></td>
+                            <td class="item-total">0.00</td>
+                            <td><button type="button" class="btn-danger remove-row-btn">x</button></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="5" style="text-align: left;">المجموع الكلي</td>
+                            <td id="grandTotal">0.00</td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
         </div>
         
         <div class="form-section">
