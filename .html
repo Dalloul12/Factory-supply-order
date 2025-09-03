@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام الفواتير - أمر توريد</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>نظام إدارة الفواتير</h1>
+            <p>أمر توريد للمصنع</p>
+        </header>
+        
+        <div class="invoice-info">
+            <div>
+                <label for="invoiceNumber">رقم الفاتورة:</label>
+                <input type="text" id="invoiceNumber" value="#">
+            </div>
+            <div>
+                <label for="invoiceDate">تاريخ الإصدار:</label>
+                <input type="date" id="invoiceDate" required>
+            </div>
+        </div>
+        
+        <div class="invoice-type">
+            <label>
+                <input type="radio" name="clientType" value="person" checked>
+                <span>عميل شخصي</span>
+            </label>
+            <label>
+                <input type="radio" name="clientType" value="company">
+                <span>شركة</span>
+            </label>
+            <label>
+                <input type="radio" name="clientType" value="merchant">
+                <span>تاجر</span>
+            </label>
+        </div>
+        
+        <div class="form-section">
+            <h2 class="section-title">معلومات العميل</h2>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="clientName">اسم العميل *</label>
+                    <input type="text" id="clientName" required>
+                </div>
+                <div class="form-group" id="companyField">
+                    <label for="companyName">اسم الشركة *</label>
+                    <input type="text" id="companyName">
+                </div>
+                <div class="form-group" id="galleryField">
+                    <label for="galleryName">اسم المعرض *</label>
+                    <input type="text" id="galleryName">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="clientAddress">عنوان العميل</label>
+                    <input type="text" id="clientAddress">
+                </div>
+                <div class="form-group">
+                    <label for="clientPhone">هاتف العميل</label>
+                    <input type="text" id="clientPhone">
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-section">
+            <h2 class="section-title">معلومات التوريد</h2>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="representative">اسم المندوب</label>
+                    <input type="text" id="representative">
+                </div>
+                <div class="form-group">
+                    <label for="deliveryAddress">عنوان التوريد *</label>
+                    <input type="text" id="deliveryAddress" required>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-section">
+            <h2 class="section-title">تفاصيل البضاعة</h2>
+            <table id="itemsTable">
+                <thead>
+                    <tr>
+                        <th width="5%">م</th>
+                        <th width="30%">البيان</th>
+                        <th width="10%">الكمية</th>
+                        <th width="15%">سعر الوحدة</th>
+                        <th width="15%">النقل</th>
+                        <th width="15%">الإجمالي</th>
+                        <th width="10%"><button type="button" class="btn-primary" id="addRowBtn">+</button></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><input type="text" class="item-desc" placeholder="وصف الصنف"></td>
+                        <td><input type="number" class="item-qty" min="1" value="1"></td>
+                        <td><input type="number" class="item-price" min="0" step="0.01" value="0"></td>
+                        <td><input type="number" class="item-shipping" min="0" step="0.01" value="0"></td>
+                        <td class="item-total">0.00</td>
+                        <td><button type="button" class="btn-danger remove-row-btn">x</button></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="5" style="text-align: left;">المجموع الكلي</td>
+                        <td id="grandTotal">0.00</td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        
+        <div class="form-section">
+            <h2 class="section-title">معلومات السداد</h2>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="paymentMethod">طريقة السداد</label>
+                    <select id="paymentMethod">
+                        <option value="نقدي">نقدي</option>
+                        <option value="شيك">شيك</option>
+                        <option value="تحويل بنكي">تحويل بنكي</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="advancePayment">المبلغ المقدم</label>
+                    <input type="number" id="advancePayment" min="0" step="0.01" value="0">
+                </div>
+                <div class="form-group">
+                    <label for="remainingPayment">المبلغ المتبقي</label>
+                    <input type="number" id="remainingPayment" readonly>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-section">
+            <div class="form-group">
+                <label for="notes">ملاحظات</label>
+                <textarea id="notes" rows="3"></textarea>
+            </div>
+        </div>
+        
+        <div class="signature-section">
+            <div class="signature-line"></div>
+            <h2><p>الإمضاء</p></h2>
+        </div>
+        
+        <div class="actions">
+            <button type="button" class="btn-success" id="printBtn">طباعة الفاتورة</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
