@@ -44,6 +44,11 @@ h1 {
     font-size: 1.5rem;
 }
 
+header p {
+    font-size: 1rem;
+    color: var(--dark-color);
+}
+
 .invoice-info {
     display: flex;
     flex-direction: column;
@@ -54,29 +59,42 @@ h1 {
     border-radius: 8px;
 }
 
+.info-item {
+    width: 100%;
+}
+
 .invoice-type {
     display: flex;
     flex-direction: column;
     margin: 15px 0;
     gap: 10px;
+    padding: 10px;
+    background: var(--light-color);
+    border-radius: 8px;
 }
 
-.invoice-type label {
+.type-option {
     display: flex;
     align-items: center;
     cursor: pointer;
     font-weight: bold;
-    padding: 8px 12px;
+    padding: 10px 12px;
     background: #f0f0f0;
-    border-radius: 5px;
+    border-radius: 6px;
     transition: all 0.3s;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.invoice-type input {
+.type-option:hover {
+    background: #e0e0e0;
+}
+
+.type-option input {
     margin-left: 8px;
 }
 
-.invoice-type input:checked + span {
+.type-option input:checked + span {
     color: var(--secondary-color);
 }
 
@@ -106,6 +124,10 @@ h1 {
     width: 100%;
 }
 
+.form-group.full-width {
+    flex: 100%;
+}
+
 label {
     display: block;
     margin-bottom: 6px;
@@ -120,6 +142,12 @@ input, select, textarea {
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 16px; /* منع التكبير في iOS */
+    box-sizing: border-box;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: var(--secondary-color);
+    outline: none;
 }
 
 .hidden {
@@ -129,6 +157,9 @@ input, select, textarea {
 .table-container {
     overflow-x: auto;
     margin: 15px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1px;
 }
 
 table {
@@ -185,6 +216,7 @@ button {
     font-weight: bold;
     transition: all 0.3s;
     min-height: 44px; /* الحجم الأدنى للمساحة القابلة للنقر */
+    box-sizing: border-box;
 }
 
 .btn-primary {
@@ -244,6 +276,14 @@ button {
     
     .invoice-type {
         flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .type-option {
+        width: auto;
+        flex: 1;
+        min-width: 120px;
         justify-content: center;
     }
     
@@ -310,5 +350,28 @@ input[type="date"] {
     .table-container {
         border: 1px solid #ddd;
         border-radius: 5px;
+    }
+    
+    .invoice-type {
+        padding: 8px;
+    }
+    
+    .type-option {
+        padding: 8px 10px;
+        font-size: 14px;
+    }
+}
+
+/* تحسينات للشاشات الصغيرة جدًا */
+@media screen and (max-width: 360px) {
+    .type-option {
+        padding: 8px;
+        font-size: 13px;
+    }
+    
+    .type-option span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 }
