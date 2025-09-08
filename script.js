@@ -1,6 +1,9 @@
 // تعيين تاريخ اليوم كتاريخ افتراضي
 document.getElementById('invoiceDate').valueAsDate = new Date();
 
+// إنشاء رقم فاتورة عشوائي (يمكن تغييره حسب الحاجة)
+document.getElementById('invoiceNumber').value = 'INV-' + new Date().getFullYear() + '-' + Math.floor(1000 + Math.random() * 9000);
+
 // إضافة مستمعي الأحداث عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', function() {
     // تبديل الحقول بناءً على نوع العميل
@@ -23,7 +26,10 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // طباعة الفاتورة
     document.getElementById('printBtn').addEventListener('click', function() {
-        window.print();
+        optimizeForPrinting();
+        setTimeout(() => {
+            window.print();
+        }, 100);
     });
     
     // إضافة مستمعي الأحداث لأزرار الحذف
@@ -35,6 +41,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // منع تكبير الصفحة تلقائياً على iOS
     preventZoom();
+    
+    // ضبط الحقول الأولية
+    toggleClientFields();
 });
 
 // منع التكبير على أجهزة iOS
@@ -55,6 +64,21 @@ function preventZoom() {
     }, { passive: false });
 }
 
+// تحسين الطباعة لتناسب صفحة A4 واحدة
+function optimizeForPrinting() {
+    // تقليل عدد صفور الجدول إذا كان كبيراً جداً
+    const rows = document.querySelectorAll('#itemsTable tbody tr');
+    if (rows.length > 8) {
+        alert('ملاحظة: عدد العناصر كبير جداً وقد لا يتناسب مع صفحة A4 واحدة. يرجى تقليل عدد العناصر أو سيتم تقسيمها على أكثر من صفحة.');
+    }
+    
+    // إخفاء العناصر غير الضرورية للطباعة
+    const elementsToHide = document.querySelectorAll('.btn-primary, .btn-danger');
+    elementsToHide.forEach(el => {
+        el.classList.add('no-print');
+    });
+}
+
 // تبديل الحقول بناءً على نوع العميل
 function toggleClientFields() {
     const clientType = document.querySelector('input[name="clientType"]:checked').value;
@@ -67,6 +91,8 @@ function toggleClientFields() {
     galleryField.style.display = 'none';
     companyName.removeAttribute('required');
     galleryName.removeAttribute('required');
+    companyName.value = '';
+    galleryName.value = '';
     
     if (clientType === 'company') {
         companyField.style.display = 'block';
@@ -90,7 +116,7 @@ function addRow() {
         <td><input type="number" class="item-price" min="0" step="0.01" value="0"></td>
         <td><input type="number" class="item-shipping" min="0" step="0.01" value="0"></td>
         <td class="item-total">0.00</td>
-        <td><button type="button" class="btn-danger remove-row-btn">x</button></td>
+        <td><button type="button" class="btn-danger no-print remove-row-btn">x</button></td>
     `;
     
     // إضافة مستمعي الأحداث للحقول الجديدة
@@ -166,3 +192,12 @@ function calculateRemaining() {
     
     document.getElementById('remainingPayment').value = remaining.toFixed(2);
 }
+
+// استعادة الحالة بعد الطباعة
+window.addEventListener('afterprint', function() {
+    // إعادة إظهار العناصر التي أخفيناها للطباعة
+    const elementsToShow = document.querySelectorAll('.no-print');
+    elementsToShow.forEach(el => {
+        el.classList.remove('no-print');
+    });
+});
