@@ -3,38 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="mobile-web-app-capable" content="yes">
-    <title>نظام الفواتير - أمر توريد</title>
+    <title>نظام إدارة الفواتير - أمر توريد</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>نظام إدارة الفواتير</h1>
-            <p>أمر توريد للمصنع</p>
+            <h1>أمر توريد للمصنع</h1>
         </header>
         
         <div class="invoice-info">
-            <div>
+            <div class="info-item">
                 <label for="invoiceNumber">رقم الفاتورة:</label>
-                <input type="text" id="invoiceNumber" value="#">
+                <input type="text" id="invoiceNumber" value="INV-2025-001">
             </div>
-            <div>
+            <div class="info-item">
                 <label for="invoiceDate">تاريخ الإصدار:</label>
                 <input type="date" id="invoiceDate" required>
             </div>
         </div>
         
         <div class="invoice-type">
-            <label>
+            <label class="type-option">
                 <input type="radio" name="clientType" value="person" checked>
                 <span>عميل شخصي</span>
             </label>
-            <label>
+            <label class="type-option">
                 <input type="radio" name="clientType" value="company">
                 <span>شركة</span>
             </label>
-            <label>
+            <label class="type-option">
                 <input type="radio" name="clientType" value="merchant">
                 <span>تاجر</span>
             </label>
@@ -89,12 +87,12 @@
                     <thead>
                         <tr>
                             <th width="5%">م</th>
-                            <th width="30%">البيان</th>
+                            <th width="35%">البيان</th>
                             <th width="10%">الكمية</th>
                             <th width="15%">سعر الوحدة</th>
                             <th width="15%">النقل</th>
                             <th width="15%">الإجمالي</th>
-                            <th width="10%"><button type="button" class="btn-primary" id="addRowBtn">+</button></th>
+                            <th width="5%"><button type="button" class="btn-primary no-print" id="addRowBtn">+</button></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -105,7 +103,7 @@
                             <td><input type="number" class="item-price" min="0" step="0.01" value="0"></td>
                             <td><input type="number" class="item-shipping" min="0" step="0.01" value="0"></td>
                             <td class="item-total">0.00</td>
-                            <td><button type="button" class="btn-danger remove-row-btn">x</button></td>
+                            <td><button type="button" class="btn-danger no-print remove-row-btn">x</button></td>
                         </tr>
                     </tbody>
                     <tfoot>
@@ -142,18 +140,18 @@
         </div>
         
         <div class="form-section">
-            <div class="form-group">
+            <div class="form-group full-width">
                 <label for="notes">ملاحظات</label>
-                <textarea id="notes" rows="3"></textarea>
+                <textarea id="notes" rows="2"></textarea>
             </div>
         </div>
         
         <div class="signature-section">
             <div class="signature-line"></div>
-            <h2><p>الإمضاء</p></h2>
+            <p>الإمضاء</p>
         </div>
         
-        <div class="actions">
+        <div class="actions no-print">
             <button type="button" class="btn-success" id="printBtn">طباعة الفاتورة</button>
         </div>
     </div>
